@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科研通 - 高校科研管理系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        :root {
+            --primary: #0071e3;
+            --primary-dark: #0062c4;
+            --dark: #1d1d1f;
+            --light: #f5f5f7;
+            --gray: #86868b;
+            --light-gray: #d2d2d7;
+            --section-padding: 100px 0;
+        }
+
+        body {
+            background-color: #fff;
+            color: var(--dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* 导航栏 - 苹果风格 */
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 0 20px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 14px;
+            font-weight: 400;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        nav ul li a:hover::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .login-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* 英雄区域 - 苹果风格 */
+        .hero {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,113,227,0.1) 0%, rgba(0,113,227,0) 70%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #1d1d1f 0%, #0071e3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: var(--gray);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(0, 113, 227, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 113, 227, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--light-gray);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* 功能展示区 - 苹果风格 */
+        .features {
+            padding: var(--section-padding);
+            background: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .section-title p {
+            font-size: 21px;
+            color: var(--gray);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+        }
+
+        .feature-icon i {
+            font-size: 60px;
+            color: var(--primary);
+        }
+
+        .feature-content {
+            padding: 30px;
+        }
+
+        .feature-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-content ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .feature-content ul li {
+            padding: 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .feature-content ul li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* 角色权限展示 */
+        .roles {
+            padding: var(--section-padding);
+            background: #f5f5f7;
+        }
+
+        .role-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 40px;
+        }
+
+        .role-image {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .role-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .role-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .role-content h2 {
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .role-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .role-item {
+            background: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .role-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+        }
+
+        .role-item h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .role-item h4 i {
+            color: var(--primary);
+        }
+
+        .role-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .role-item ul li {
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .role-item ul li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* 统计展示区 */
+        .stats {
+            padding: var(--section-padding);
+            background: #fff;
+            text-align: center;
+        }
+
+        .stats-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .stat-item {
+            background: #f5f5f7;
+            border-radius: 18px;
+            padding: 30px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+            transform: translateY(-5px);
+        }
+
+        .stat-item i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .stat-item .number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .stat-item .label {
+            font-size: 18px;
+            color: var(--gray);
+        }
+
+        /* 页脚 */
+        footer {
+            background: var(--dark);
+            color: #fff;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .footer-about p {
+            color: var(--light-gray);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul li a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light-gray);
+            font-size: 14px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .role-container {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 20px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .role-list {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="logo">科研<span>通</span></div>
+
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>高校科研管理，从未如此高效</h1>
+            <p>科研通为您提供一体化的科研管理解决方案，打破数据孤岛，实现科研全流程数字化管理</p>
+            <div class="hero-btns">
+                <a href="http://192.168.81.1:8080/" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> 立即体验
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <i class="fas fa-play-circle"></i> 观看演示
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心功能 -->
+    <section class="features">
+        <div class="section-title">
+            <h2>全面解决科研管理痛点</h2>
+            <p>科研通集成了科研成果管理、多维度统计分析和权限控制等核心功能，满足高校科研管理的全方位需求</p>
+        </div>
+
+        <div class="feature-grid">
+            <!-- 功能卡片 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>多角色登录管理</h3>
+                    <p>支持科研人员、学院管理员、学校管理员和系统管理员四种角色登录，各角色拥有专属界面和功能权限。</p>
+                    <ul>
+                        <li>动态身份验证与权限控制</li>
+                        <li>加密传输与安全存储</li>
+                        <li>会话管理与访问控制</li>
+                        <li>个性化功能界面</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 功能卡片 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>科研成果管理</h3>
+                    <p>全面管理各类科研成果，包括论文、专利、竞赛、著作和科研项目等，实现科研数据统一管理。</p>
+                    <ul>
+                        <li>多类型成果分类管理</li>
+                        <li>增删改查完整功能</li>
+                        <li>单条录入与批量导入</li>
+                        <li>审核流程与权限控制</li>
+                        <li>多条件组合搜索</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 功能卡片 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>多维度统计分析</h3>
+                    <p>提供丰富的可视化统计功能，帮助管理人员全面掌握科研动态，辅助决策。</p>
+                    <ul>
+                        <li>年度趋势分析</li>
+                        <li>学科对比分析</li>
+                        <li>个人贡献分析</li>
+                        <li>交互式图表展示</li>
+                        <li>数据导出与报表生成</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 角色权限 -->
+    <section class="roles">
+        <div class="role-container">
+            <div class="role-image">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="角色权限">
+            </div>
+            <div class="role-content">
+                <h2>精细化的权限管理</h2>
+                <div class="role-list">
+                    <!-- 角色1 -->
+                    <div class="role-item">
+                        <h4><i class="fas fa-user-graduate"></i> 科研人员</h4>
+                        <ul>
+                            <li>填写和提交科研成果</li>
+                            <li>查询个人科研成果</li>
+                            <li>查看个人科研统计</li>
+                            <li>审核前修改成果信息</li>
+                        </ul>
+                    </div>
+
+                    <!-- 角色2 -->
+                    <div class="role-item">
+                        <h4><i class="fas fa-user-tie"></i> 学院管理员</h4>
+                        <ul>
+                            <li>审核本学院科研成果</li>
+                            <li>查询学院成果数据</li>
+                            <li>下载本学院成果</li>
+                            <li>管理学院科研人员</li>
+                        </ul>
+                    </div>
+
+                    <!-- 角色3 -->
+                    <div class="role-item">
+                        <h4><i class="fas fa-user-cog"></i> 学校管理员</h4>
+                        <ul>
+                            <li>管理全校科研成果</li>
+                            <li>查看全校统计数据</li>
+                            <li>导出全校科研报表</li>
+                            <li>生成教育部标准报表</li>
+                        </ul>
+                    </div>
+
+                    <!-- 角色4 -->
+                    <div class="role-item">
+                        <h4><i class="fas fa-user-shield"></i> 系统管理员</h4>
+                        <ul>
+                            <li>用户账号管理</li>
+                            <li>权限分配与控制</li>
+                            <li>系统配置与维护</li>
+                            <li>数据备份与恢复</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+
+            <div class="footer-links">
+                <h3>联系我们</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-envelope"></i> 2291030314@qq.com</a></li>
+                    <li><a href="#"><i class="fas fa-phone"></i> 130-0956-0946</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> 长沙市开福区</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            &copy; 2025 国防科技大学电子科学学院 版权所有
+        </div>
+    </footer>
+
+    <script>
+        // 简单的滚动动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            const roleItems = document.querySelectorAll('.role-item');
+            const statItems = document.querySelectorAll('.stat-item');
+
+            // 添加滚动动画
+            function animateOnScroll() {
+                featureCards.forEach(card => {
+                    const cardPosition = card.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+
+                    if(cardPosition < screenPosition) {
+                        card.style.opacity = "1";
+                        card.style.transform = "translateY(0)";
+                    }
+                });
+
+                roleItems.forEach(item => {
+                    const itemPosition = item.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+
+                    if(itemPosition < screenPosition) {
+                        item.style.opacity = "1";
+                        item.style.transform = "translateY(0)";
+                    }
+                });
+
+                statItems.forEach(item => {
+                    const itemPosition = item.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+
+                    if(itemPosition < screenPosition) {
+                        item.style.opacity = "1";
+                        item.style.transform = "translateY(0)";
+                    }
+                });
+            }
+
+            // 初始化透明度
+            featureCards.forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+            });
+
+            roleItems.forEach(item => {
+                item.style.opacity = "0";
+                item.style.transform = "translateY(20px)";
+                item.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+            });
+
+            statItems.forEach(item => {
+                item.style.opacity = "0";
+                item.style.transform = "translateY(20px)";
+                item.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+            });
+
+            // 监听滚动事件
+            window.addEventListener('scroll', animateOnScroll);
+            // 初始加载时也触发一次
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>
