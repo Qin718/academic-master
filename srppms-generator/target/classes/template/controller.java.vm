@@ -1,0 +1,60 @@
+package ${package.Controller};
+
+import com.example.common.basic.MultiRequestBody;
+import com.example.common.response.R;
+import ${package.Parent}.system.domain.bo.${entity}Bo;
+import com.example.system.domain.bo.PageBo;
+import ${package.Parent}.system.domain.vo.${entity}Vo;
+import com.example.system.domain.vo.PageVo;
+import com.example.system.service.${table.serviceName};
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@Api(value = "$!{table.comment}管理", tags = {"$!{table.comment}管理"})
+@RequestMapping(value = "/${table.entityPath}", method = {RequestMethod.POST, RequestMethod.GET})
+public class ${table.controllerName} {
+
+    @Autowired
+    private ${table.serviceName} ${table.entityPath}Service;
+
+    @ResponseBody
+    @RequestMapping("/getPageVo")
+    @ApiOperation("获取$!{table.comment}列表-分页")
+    public R<PageVo> getPageVo(@RequestBody PageBo pageBo) {
+        return ${table.entityPath}Service.getPageVo(pageBo);
+    }
+
+    @ResponseBody
+    @RequestMapping("/getList")
+    @ApiOperation("获取$!{table.comment}列表-不分页")
+    public R<List<${entity}Vo>> getList() {
+        return R.ok(${table.entityPath}Service.getList());
+    }
+
+    @ResponseBody
+    @RequestMapping("/update")
+    @ApiOperation("更新$!{table.comment}")
+    public R<PageVo> update${entity}(@MultiRequestBody ${entity}Bo ${table.entityPath}Bo, @MultiRequestBody PageBo pageBo) {
+        return ${table.entityPath}Service.update${entity}(${table.entityPath}Bo,pageBo);
+    }
+
+    @ResponseBody
+    @RequestMapping("/insert")
+    @ApiOperation("添加$!{table.comment}")
+    public R<PageVo> insert${entity}(@MultiRequestBody ${entity}Bo ${table.entityPath}Bo, @MultiRequestBody PageBo pageBo) {
+        return ${table.entityPath}Service.insert${entity}(${table.entityPath}Bo,pageBo);
+    }
+
+    @ResponseBody
+    @RequestMapping("/delete/{id}")
+    @ApiOperation("删除$!{table.comment}")
+    public R<PageVo> delete${entity}(@PathVariable("id") Integer id, @MultiRequestBody PageBo pageBo) {
+        return ${table.entityPath}Service.delete${entity}(id,pageBo);
+    }
+
+}

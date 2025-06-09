@@ -1,0 +1,19 @@
+package ${package.Mapper};
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import ${package.Parent}.system.domain.bo.${entity}Bo;
+import ${package.Entity}.${entity};
+import ${package.Parent}.system.domain.vo.${entity}Vo;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+@Mapper public interface ${table.mapperName} extends BaseMapper
+
+<${entity}> {
+
+    List<${entity}Vo> getList();
+
+    void insert${entity}(@Param("bo") ${entity}Bo bo);
+}

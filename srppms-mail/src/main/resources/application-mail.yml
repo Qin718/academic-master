@@ -1,0 +1,12 @@
+spring:
+    mail:
+        host: smtp.qq.com
+        #邮箱账号
+        username: XXXXXXXXXX@qq.com
+        #授权码
+        password: XXXXXXXXXXXXXXXX
+        default-encoding: UTF-8
+        open: false
+    html:
+        code: /static/code.html
+        status: /static/status.html

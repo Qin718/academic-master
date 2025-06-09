@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.ConfigMapper">
+    <insert id="insertConfig" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_config (config, value, remark)
+        values (#{config.config}, #{config.value}, #{config.value,jdbcType=VARCHAR})
+    </insert>
+    <select id="getConfigList" resultType="com.example.system.domain.entity.Config">
+        select *
+        from sys_config
+    </select>
+</mapper>

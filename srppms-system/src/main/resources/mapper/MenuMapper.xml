@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.MenuMapper">
+    <insert id="insertMenu" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_menu (parent_id, name, url, type, icon, order_num, access, component, com_name, is_show)
+        VALUES (#{menu.parentId}, #{menu.name}, #{menu.url}, #{menu.type}, #{menu.icon}, #{menu.orderNum},
+                #{menu.access}, #{menu.component}, #{menu.comName}, #{menu.isShow})
+    </insert>
+    <insert id="insertListId">
+        insert into sys_menu (id, parent_id, name, url, type, icon, order_num, access, component, com_name, is_show)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id}, #{item.parentId}, #{item.name}, #{item.url},#{item.type}, #{item.icon}, #{item.orderNum},
+            #{item.access}, #{item.component}, #{item.comName}, #{item.isShow})
+        </foreach>
+    </insert>
+    <select id="getMenuList" resultType="com.example.system.domain.entity.Menu">
+        select sm.*, (select sm1.`name` from sys_menu sm1 where sm1.id = sm.parent_id) as parentName
+        from sys_menu sm
+        order by parent_id, order_num, id
+    </select>
+    <update id="updateMenuList">
+        <foreach collection="list" separator=";" close="" open="" item="item">
+            update sys_menu set
+            <if test="item.name!=null and item.name!= ''">
+                name=#{item.name},
+            </if>
+            <if test="item.url!=null and item.url!= ''">
+                url=#{item.url},
+            </if>
+            <if test="item.parentId!=null and item.parentId!= ''">
+                parent_id=#{item.parentId},
+            </if>
+            <if test="item.type!=null and item.type!= ''">
+                type=#{item.type},
+            </if>
+            <if test="item.icon!=null and item.icon!= ''">
+                icon=#{item.icon},
+            </if>
+            <if test="item.orderNum!=null and item.orderNum!= ''">
+                order_num=#{item.orderNum},
+            </if>
+            <if test="item.access!=null and item.access!= ''">
+                access=#{item.access},
+            </if>
+            <if test="item.component!=null and item.component!= ''">
+                component=#{item.component},
+            </if>
+            <if test="item.comName!=null and item.comName!= ''">
+                com_name=#{item.comName},
+            </if>
+            <if test="item.isShow!=null and item.isShow!= ''">
+                is_show=#{item.isShow},
+            </if>
+            id=#{item.id}
+            where id = #{item.id}
+        </foreach>
+    </update>
+</mapper>

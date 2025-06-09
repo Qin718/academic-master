@@ -1,0 +1,13 @@
+2025-06-05 13:11:30 [main] INFO  com.example.StartApplication - Starting StartApplication using Java 17.0.13 on zwh with PID 2240 (D:\srppms-master\srppms-admin\target\classes started by 24824 in D:\srppms-master\srppms-admin)
+2025-06-05 13:11:30 [main] INFO  com.example.StartApplication - The following 1 profile is active: "mail"
+2025-06-05 13:13:06 [main] INFO  com.example.StartApplication - Starting StartApplication using Java 17.0.13 on zwh with PID 20216 (D:\srppms-master\srppms-admin\target\classes started by 24824 in D:\srppms-master\srppms-admin)
+2025-06-05 13:13:06 [main] INFO  com.example.StartApplication - The following 1 profile is active: "mail"
+2025-06-05 13:13:10 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8888"]
+2025-06-05 13:13:10 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-05 13:13:10 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.63]
+2025-06-05 13:13:10 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-06-05 13:13:14 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-05 13:13:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-05 13:13:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-05 13:13:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-05 13:13:16 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]

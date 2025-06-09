@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.LogMapper">
+    <insert id="insertLog" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_log (account, url, uri, method, time, ip, create_date, control_class, params, result, mobile,
+                             inner_ip, type, code, message, os, browser, method_api, class_api)
+        values (#{log.account}, #{log.url}, #{log.uri}, #{log.method}, #{log.time}, #{log.ip},
+                #{log.createDate}, #{log.controlClass}, #{log.params}, #{log.result}, #{log.mobile}, #{log.innerIp}
+                   , #{log.type}, #{log.code}, #{log.message}, #{log.os}, #{log.browser}, #{log.methodApi},
+                #{log.classApi})
+    </insert>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.RoleMenuMapper">
+    <insert id="insertList" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_role_menu (menu_id, access, role_id, relationship) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.menuId},#{item.access},#{item.roleId},#{item.relationship})
+        </foreach>
+    </insert>
+    <insert id="insertListId">
+        insert into sys_role_menu (id, menu_id, access, role_id, relationship) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.menuId},#{item.access},#{item.roleId},#{item.relationship})
+        </foreach>
+    </insert>
+    <delete id="deleteList">
+        delete from sys_role_menu where
+        <foreach collection="list" item="item" separator="or">
+            (menu_id=#{item.menuId} and access =#{item.roleId})
+        </foreach>
+    </delete>
+    <select id="getRoleMenuList" resultType="com.example.system.domain.entity.RoleMenu">
+        SELECT rm.*,role.access
+        FROM sys_role_menu rm
+        left JOIN sys_role role ON rm.role_id = role.id
+    </select>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.InterfaceMapper">
+    <select id="getInterfaceList" resultType="com.example.system.domain.model.Interface">
+        select s.*,s1.account from (
+            select
+                s.method_api as method,
+                s.class_api as clazz,
+                MIN(s.create_date) as time,
+                round(avg(s.time),0) as average
+            from sys_log s
+            group by s.method_api,s.class_api
+        ) s join sys_log s1
+        on s1.method_api=s.method
+        and s1.class_api=s.clazz
+        and s1.create_date = s.time
+        order by s.average desc
+    </select>
+</mapper>

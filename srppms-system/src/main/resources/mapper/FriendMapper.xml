@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.FriendMapper">
+    <select id="getFriendList" resultType="com.example.system.domain.vo.FriendVo">
+        SELECT
+            sf.user_a AS userA,
+            sf.user_id_a AS userIdA,
+            su.account AS userB,
+            su.id AS userIdB,
+            si.image AS image,
+            ifnull( sf.notes, su.username ) AS notes,
+            sf.STATUS AS STATUS,
+            su.NAME AS NAME
+        FROM
+            sys_friend sf
+                JOIN sys_user su ON su.id = sf.user_id_b
+                JOIN sys_image si ON su.image_id = si.id
+        where sf.user_a = #{account}
+    </select>
+    <insert id="insertFriendListId">
+        insert into sys_friend (id, user_id_a, user_id_b, user_a, user_b, status, notes) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.userIdA},#{item.userIdB},#{item.userA},#{item.userB},#{item.status},#{item.notes})
+        </foreach>
+    </insert>
+    <insert id="insertFriend" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_friend (user_id_a, user_id_b, user_a, user_b, status, notes)
+        values (#{userIdA}, #{userIdB}, #{userA}, #{userB}, #{status}, #{notes})
+    </insert>
+    <select id="getListApp" resultType="com.example.system.domain.vo.FriendVo">
+        select sf.user_a    as userA,
+               sf.user_id_a as userIdA,
+               sf.user_b    as userB,
+               sf.user_id_b as userIdB,
+               si.image     as image,
+               ifnull( sf.notes, su.username ) AS notes,
+               sf.status    as status,
+               su.name      as name
+        from sys_friend sf
+                 join sys_user su on su.id = sf.user_id_a
+                 join sys_image si on su.image_id = si.id
+        where user_id_b = #{userId}
+    </select>
+    <delete id="deleteFriend">
+        delete from sys_friend where user_id_a = #{bo.userIdA} and user_id_b = #{bo.userIdB};
+        delete from sys_friend where user_id_a = #{bo.userIdB} and user_id_b = #{bo.userIdA};
+    </delete>
+    <update id="friendUpdateList">
+        <foreach collection="list" item="item" separator=";" open="" close="">
+            update sys_friend set
+            <if test="item.userIdA != null and item.userIdA != ''">
+                user_id_a = #{item.userIdA},
+            </if>
+            <if test="item.userIdB != null and item.userIdB != ''">
+                user_id_b = #{item.userIdB},
+            </if>
+            <if test="item.userA != null and item.userA != ''">
+                user_a = #{item.userA},
+            </if>
+            <if test="item.userB != null and item.userB != ''">
+                user_b = #{item.userB},
+            </if>
+            <if test="item.status != null and item.status != ''">
+                status = #{item.status},
+            </if>
+            <if test="item.notes != null and item.notes != ''">
+                notes= #{item.notes},
+            </if>
+            id = #{item.id}
+            where id = #{item.id}
+        </foreach>
+    </update>
+</mapper>

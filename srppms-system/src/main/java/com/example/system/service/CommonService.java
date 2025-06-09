@@ -1,0 +1,6 @@
+package com.example.system.service;
+
+
+public interface CommonService {
+    void checkDataBase();
+}

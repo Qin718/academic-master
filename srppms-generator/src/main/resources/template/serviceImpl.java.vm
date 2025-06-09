@@ -1,0 +1,52 @@
+package ${package.ServiceImpl};
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.common.response.R;
+import ${package.Parent}.system.domain.bo.${entity}Bo;
+import com.example.system.domain.bo.PageBo;
+import ${package.Parent}.system.domain.entity.${entity};
+import ${package.Parent}.system.domain.vo.${entity}Vo;
+import com.example.system.domain.vo.PageVo;
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service public class ${table.serviceImplName} extends ServiceImpl<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+
+    @Autowired
+    private ${table.mapperName} ${table.entityPath}Mapper;
+
+    @Override
+    public List<${entity}Vo> getList() {
+        return ${table.entityPath}Mapper.getList();
+    }
+
+    @Override
+    public R<PageVo> getPageVo(PageBo pageBo) {
+        List<${entity}Vo> list = this.getList();
+        return R.ok(new PageVo(pageBo, list));
+    }
+
+    @Override
+    public R<PageVo> update${entity}(${entity}Bo ${table.entityPath}Bo, PageBo pageBo) {
+        ${table.entityPath}Mapper.updateById(${table.entityPath}Bo);
+        return this.getPageVo(pageBo);
+    }
+
+    @Override
+    public R<PageVo> insert${entity}(${entity}Bo ${table.entityPath}Bo, PageBo pageBo) {
+        ${table.entityPath}Mapper.insert(${table.entityPath}Bo);
+        return this.getPageVo(pageBo);
+    }
+
+    @Override
+    public R<PageVo> delete${entity}(Integer id, PageBo pageBo) {
+        //删除前的其他操作
+        ${table.entityPath}Mapper.deleteById(id);
+        return this.getPageVo(pageBo);
+    }
+
+}

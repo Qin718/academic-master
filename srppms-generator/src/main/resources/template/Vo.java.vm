@@ -1,0 +1,19 @@
+package ${package.Parent}.system.domain.vo;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import ${package.Entity}.${entity};
+#if(${swagger})
+import io.swagger.annotations.Api;
+#end
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@TableName("${schemaName}${table.name}")
+@EqualsAndHashCode(callSuper = true)
+#if(${swagger})
+@Api(value = "$!{table.comment}实体", tags = "$!{table.comment}实体")
+#end
+public class ${entity}Vo extends ${entity}{
+
+}

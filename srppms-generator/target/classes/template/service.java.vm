@@ -1,0 +1,23 @@
+package ${package.Service};
+
+import com.example.common.response.R;
+import ${package.Parent}.system.domain.bo.${entity}Bo;
+import com.example.system.domain.bo.PageBo;
+import ${package.Parent}.system.domain.vo.${entity}Vo;
+import com.example.system.domain.vo.PageVo;
+
+import java.util.List;
+
+public interface ${table.serviceName}{
+
+    List<${entity}Vo> getList();
+
+    R<PageVo> getPageVo(PageBo pageBo);
+
+    R<PageVo> update${entity}(${entity}Bo ${table.entityPath}Bo, PageBo pageBo);
+
+    R<PageVo> insert${entity}(${entity}Bo ${table.entityPath}Bo, PageBo pageBo);
+
+    R<PageVo> delete${entity}(Integer id, PageBo pageBo);
+
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.ProjectMapper">
+    <insert id="insertProject" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_project (name, content, type, money, remark)
+        VALUES (#{name}, #{content}, #{type}, #{money}, #{remark})
+    </insert>
+    <select id="getProjectKindList" resultType="com.example.system.domain.model.ProjectKind">
+        select sp.type as name, count(*) as value
+        from sys_project sp
+                 join sys_item si on sp.id = si.project_id
+        where date_format(si.create_time, '%Y') like concat('%', #{year}, '%')
+        group by sp.type
+    </select>
+    <select id="selectProjectByYear" resultType="com.example.system.domain.model.ProjectKindInfo">
+        select sp.name as ItemName, sum(ss.score) as scoreNumber
+        from sys_score ss
+                 join sys_project sp on ss.project_id = sp.id
+                 left join sys_item si on sp.id = si.project_id
+        where date_format(si.create_time, '%Y') like concat('%', #{year}, '%')
+        group by ss.project_id
+        order by sum(ss.score) desc
+        limit 1
+    </select>
+    <select id="getProjectListByYear" resultType="com.example.system.domain.vo.ProjectVo">
+        select sp.money      as money,
+               si.project_id as id,
+               IFNULL((select sp.process
+                       from (select sp.* from sys_process sp where sp.is_process = 'YES') sp
+                       where sp.project_id =
+                             si.project_id
+                       group by sp.process
+                       order by process
+                       limit 1), "未审核") as status
+        from sys_item si
+                 join sys_user su on si.create_by = su.id
+                 left join sys_project sp on sp.id = si.project_id
+        where date_format(si.create_time, '%Y') like concat('%', #{year}, '%')
+    </select>
+</mapper>

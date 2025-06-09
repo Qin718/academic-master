@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.RoleMapper">
+    <sql id="getAllRole">
+        select *, (select username from sys_user where id = create_by) as createByName
+        from sys_role
+    </sql>
+    <insert id="insertBo">
+        insert into sys_role (role_name, remark, create_by, create_time, access, activation)
+        values (#{bo.roleName}, #{bo.remark}, #{bo.createBy}, #{bo.createTime}, #{bo.access}, #{bo.activation})
+    </insert>
+    <select id="getRoleByAccount" resultType="com.example.system.domain.entity.Role">
+        select sr.*
+        from sys_role sr
+                 left join sys_user_role sur on sr.id = sur.role_id
+                 left outer join sys_user su on su.id = sur.user_id
+        where su.account = #{account}
+    </select>
+    <select id="getRoleByUserId" resultType="com.example.system.domain.entity.Role">
+        select sr.*
+        from sys_role sr
+                 left join sys_user_role sur on sr.id = sur.role_id
+                 left outer join sys_user su on su.id = sur.user_id
+        where su.id = #{userId}
+    </select>
+    <select id="getList" resultType="com.example.system.domain.entity.Role">
+        select sr.*,
+               su.name as createByName
+        from sys_role sr
+                 join sys_user_role sur on sr.create_by = sur.role_id
+                 join sys_user su on su.id = sur.user_id
+    </select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.RolePermMapper">
+    <insert id="insertList" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_role_perm (role_id, perm_id, relationship) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.roleId},#{item.permId},#{item.relationship})
+        </foreach>
+    </insert>
+    <delete id="deleteList">
+        delete from sys_role_perm where
+        <foreach collection="list" item="item" separator="or">
+            ( role_id = #{item.roleId} and perm_id = #{item.permId})
+        </foreach>
+    </delete>
+</mapper>

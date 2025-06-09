@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.ProcessMapper">
+    <sql id="getProcessList">
+        select *
+        from sys_process
+    </sql>
+    <insert id="insertProcessList" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_process ( project_id, user_id, process, remark, is_process)
+        values
+        <foreach item="item" separator="," collection="List">
+            (#{item.projectId},#{item.userId},#{item.process},#{item.remark},#{item.isProcess})
+        </foreach>
+    </insert>
+    <update id="updateList">
+        <foreach collection="List" item="item" index="index" separator=";" open="" close="">
+            update sys_process set
+            <if test="item.projectId!=null">
+                project_id=#{item.projectId},
+            </if>
+            <if test="item.userId!=null">
+                user_id=#{item.userId},
+            </if>
+            <if test="item.process!=null">
+                process=#{item.process},
+            </if>
+            <if test="item.remark!=null">
+                remark=#{item.remark},
+            </if>
+            <if test="item.isProcess!=null">
+                is_process=#{item.isProcess},
+            </if>
+            id=#{item.id}
+            where id=#{item.id}
+        </foreach>
+    </update>
+    <select id="checkUserProcessMyItem" resultType="java.lang.Integer">
+        select sp.id from sys_process sp
+            join sys_item si on sp.project_id = si.project_id
+            join sys_user su on sp.user_id = su.id
+        where si.create_by = su.id
+    </select>
+</mapper>

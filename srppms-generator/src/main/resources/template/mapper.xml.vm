@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package.Mapper}.${table.mapperName}">
+    <select id="getList" resultType="${package.Parent}.system.domain.vo.${entity}Vo">
+        select * from ${table.Name}
+    </select>
+    <insert id="insert${entity}" keyColumn="#foreach($field in ${table.fields})#if(${field.keyFlag})${field.name}#end#end" keyProperty="#foreach($field in ${table.fields})#if(${field.keyFlag})${field.name}#end#end" useGeneratedKeys="true">
+        insert into ${table.Name} (#foreach($field in ${table.fields})#if(!${field.keyFlag})${field.name}#if($foreach.hasNext), #end#end#end) values
+        (#foreach($field in ${table.fields})#if(!${field.keyFlag})#{bo.${field.name}}#if($foreach.hasNext), #end#end#end)
+    </insert>
+</mapper>

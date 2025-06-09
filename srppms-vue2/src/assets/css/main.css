@@ -1,0 +1,21 @@
+.el-table{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.el-input.style {
+  width: 80%
+}
+
+.el-select {
+  width: 80%;
+}
+
+.el-select-dropdown__item {
+  text-align: center;
+}
+
+/*新增，编辑窗口宽度*/
+.el-card .el-dialog {
+  width: 35%;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.FileMapper">
+    <insert id="insertFileList" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_file (name, stream , type, project_id) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.name},#{item.stream},#{item.type},#{item.projectId})
+        </foreach>;
+        <!--删除项目重复附件-->
+        delete from sys_file where id in (
+            select id from (
+                SELECT f1.id FROM sys_file f1
+                    join sys_file f2 on
+                        f1.name=f2.name
+                        and f1.stream=f2.stream
+                        and f1.project_id=f2.project_id
+                        and f1.id > f2. id
+            ) as f1f2i
+        )
+    </insert>
+</mapper>

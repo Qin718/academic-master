@@ -1,0 +1,67 @@
+{
+  "name": "srppms-vue2",
+  "version": "1.1.1",
+  "description": "srppms项目前端VUE2.0版本",
+  "author": "caibin-00 <1258350369@qq.com>",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "address": "^2.0.3",
+    "axios": "^1.7.4",
+    "core-js": "^3.8.3",
+    "cors": "^2.8.5",
+    "default-passive-events": "^2.0.0",
+    "echarts": "^5.4.2",
+    "element-ui": "^2.15.14",
+    "file-saver": "^2.0.5",
+    "js-base64": "^3.7.7",
+    "less": "^3.0.0",
+    "less-loader": "^12.2.0",
+    "nprogress": "^0.2.0",
+    "pako": "^2.1.0",
+    "print-js": "^1.6.0",
+    "vue": "^2.6.14",
+    "vue-cropper": "^0.6.5",
+    "vue-router": "^3.0.0",
+    "vuex": "^3.6.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "script-loader": "^0.7.2",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {
+      "no-unused-vars": "off",
+      "vue/multi-word-component-names": "off",
+      "no-mixed-spaces-and-tabs": 0
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

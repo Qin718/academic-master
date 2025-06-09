@@ -1,0 +1,22 @@
+2025-06-08 00:00:07 [main] INFO  com.example.StartApplication - Starting StartApplication using Java 17.0.13 on Hedgehog with PID 28752 (Z:\University\25\信息系统\srppms-master\srppms-master\srppms-admin\target\classes started by Lenovo in Z:\University\25\信息系统\srppms-master\srppms-master)
+2025-06-08 00:00:07 [main] INFO  com.example.StartApplication - The following 1 profile is active: "mail"
+2025-06-08 00:00:09 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8888"]
+2025-06-08 00:00:09 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-08 00:00:09 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.63]
+2025-06-08 00:00:10 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-06-08 00:00:12 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-08 00:00:12 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-08 00:00:12 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-08 00:00:12 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-08 00:00:12 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-06-08 00:00:28 [main] INFO  com.example.StartApplication - Starting StartApplication using Java 17.0.13 on Hedgehog with PID 6640 (Z:\University\25\信息系统\srppms-master\srppms-master\srppms-admin\target\classes started by Lenovo in Z:\University\25\信息系统\srppms-master\srppms-master)
+2025-06-08 00:00:28 [main] INFO  com.example.StartApplication - The following 1 profile is active: "mail"
+2025-06-08 00:00:30 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8888"]
+2025-06-08 00:00:30 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-08 00:00:30 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.63]
+2025-06-08 00:00:30 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-06-08 00:00:33 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-08 00:00:33 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-08 00:00:33 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-08 00:00:33 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-08 00:00:33 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
